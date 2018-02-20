@@ -1,6 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+body {
+  overflow-x: hidden;
+  font-family: 'Work Sans', sans-serif;
+}
+
 .starter-template {
-  padding: 40px 15px;
   text-align: center;
+  background-image: url('../images/henry-be-228194.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: right;
 }
 
 #login, #loggedin {
@@ -18,10 +28,26 @@
 .artist {
   width: 400px;
   text-align: left;
-  margin: 10px auto;
-  display: inline-block;
+  margin: 1rem;
 }
 
 .artist img {
   object-fit: cover;
+}
+
+#learn-more {
+  background-color: white;
+}
+
+#splash {
+  color: white;
+  height: 100vh;
+}
+
+.artist-container{
+  height: 30vh;
+
+  border: 2px solid black;
+  text-align: left;
+
 }

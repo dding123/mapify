@@ -1,85 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>CollabMap</title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <!-- bootstrap.min.css -->
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Mapify</title>
 
-    <!-- Custom styles for this template -->
-    <link href="css/styles.css" rel="stylesheet">
+  <!-- bootstrap.min.css -->
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+  <!-- Custom styles for this template -->
+  <link href="css/styles.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body>
+<body>
 
-
-    <div class="container">
-
-      <div class="starter-template">
-        <h1>CollabMap</h1>
-        <p class="lead">Based on a template from JMPerez</p>
+  <!-- ko ifnot: isLoggedIn -->
+  <div class="starter-template">
+    <div id="splash">
+      <h1>mapify</h1>
+      <p class="lead">
+        <strong>putting your favorite artists on a map</strong>
+      </p>
+      <p>powered by spotify and google maps</p>
+      <button id="login-button" class="btn btn-success" data-bind="click: login">Log in with Spotify</button>
+      <div data-bind="if: loginErrorMessage">
+        <div class="alert alert-danger" data-bind="text: loginErrorMessage"></div>
       </div>
+    </div>
+    <div id="learn-more"></div>
+  </div>
+  <!-- /ko -->
+  <div class="container">
 
-      <!-- ko ifnot: isLoggedIn -->
-      <div id="login">
-        <div data-bind="if: loginErrorMessage">
-          <div class="alert alert-danger" data-bind="text: loginErrorMessage"></div>
-        </div>
-        <button id="login-button" class="btn btn-primary" data-bind="click: login">Log in with Spotify</button>
-      </div>
-      <!-- /ko -->
+    <!-- ko if: isLoggedIn -->
 
-      <!-- ko if: isLoggedIn -->
-      <div id="loggedin">
+    <nav class="navbar navbar-light bg-faded">
+      <h1 class="navbar-brand mb-0">mapify</h1>
+      <ul class="nav navbar-nav navbar-right">
         <div data-bind="with: user">
-          <h1>Logged in as <span data-bind="text: display_name"></span></h1>
-          <img data-bind="attr: {src: images[0].url}">
+          <span data-bind="text: display_name"></span>
+          <div style=" width: 3rem; height: 3rem; position: static; overflow: hidden; -webkit-border-radius: 50%;
+        -moz-border-radius: 50%; -ms-border-radius: 50%; -o-border-radius: 50%; border-radius: 50%;">
+            <!--figure out why the hell I have to put the styling here-->
+            <img data-bind="attr: {src: images[0].url}" style="display: inline; margin: 0 auto; height: 100%; width: auto;">
+            <!--figure out why the hell I have to put the styling here-->
+          </div>
         </div>
+      </ul>
+    </nav>
 
-        <hr />
+    <div id="loggedin">
 
-        <h2>Some of my favorite artists</h2>
-        <ul data-bind="foreach: artists">
+      <hr />
+
+      <h2>Some of my favorite artists</h2>
+      <ul data-bind="foreach: artists">
+        <div class="artist-container">
           <li class="media artist">
             <div class="media-left">
-              <img data-bind="attr: {src: images.length ? images[0].url : ''}" width="200" height="200" />
+              <a data-bind="attr: {href:uri}">
+                <img data-bind="attr: {src: images.length ? images[0].url : ''}" width="200" height="200" />
+              </a>
             </div>
             <div class="media-body">
-              <div class="media-heading" data-bind="text:name"></div>
-              <hr />
+              <div class="media-heading artistName" data-bind="text:name"></div>
+
               <p>Genres</p>
               <div class="media-heading" data-bind="text:genres"></div>
             </div>
           </li>
-        </ul>
+        </div>
+      </ul>
 
-        <button id="login-button" class="btn btn-primary" data-bind="click: logout">Log out from Spotify</button>
-      </div>
-      <!-- /ko -->
+      <!--logout-->
+      <button id="login-button" class="btn btn-primary" data-bind="click: logout">Log out from Spotify</button>
     </div>
+    <!-- /ko -->
+  </div>
 
+  <!-- jQuery required for Bootstrap core JavaScript -->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <!-- This file would be available as a vendor dependency in your local project if you're using Bower or Composer -->
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/knockout/dist/knockout.js"></script>
+  <script src="bower_components/spotify-web-api-js/src/spotify-web-api.js"></script>
+  <script src="js/oauth-config.js"></script>
+  <script src="js/oauth-manager.js"></script>
+ <!-- <script src="js/main.js"></script>-->
+  <script src="js/main.js"></script>
 
-    <!-- jQuery required for Bootstrap core JavaScript -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <!-- This file would be available as a vendor dependency in your local project if you're using Bower or Composer -->
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="bower_components/knockout/dist/knockout.js"></script>
-    <script src="bower_components/spotify-web-api-js/src/spotify-web-api.js"></script>
-    <script src="js/oauth-config.js"></script>
-    <script src="js/oauth-manager.js"></script>
-    <script src="js/main.js"></script>
-  </body>
+</body>
+
 </html>
