@@ -44,10 +44,30 @@ body {
   height: 100vh;
 }
 
-.artist-container{
+.artist-container {
   height: 30vh;
-
-  border: 2px solid black;
   text-align: left;
+}
 
+.artistPic {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
+.apHold {
+  width: 3rem;
+  height: 3rem;
+  position: static;
+  overflow: hidden;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.artistName{
+  cursor: pointer;
 }

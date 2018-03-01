@@ -64,17 +64,17 @@
 
       <hr />
 
-      <h2>Some of my favorite artists</h2>
+      <h2>Your Favorite Artists</h2>
       <ul data-bind="foreach: artists">
         <div class="artist-container">
           <li class="media artist">
             <div class="media-left">
-              <a data-bind="attr: {href:uri}">
-                <img data-bind="attr: {src: images.length ? images[0].url : ''}" width="200" height="200" />
+              <a data-bind="attr: {href:uri}" class="apHold">
+                <img data-bind="attr: {src: images.length ? images[0].url : ''}" width="200" height="200" class="artistPic"/>
               </a>
             </div>
             <div class="media-body">
-              <div class="media-heading artistName" data-bind="text:name"></div>
+              <div class="media-heading artistName" data-bind="event:{click:$parent.GetArtistEvents}, text:name"></div>
 
               <p>Genres</p>
               <div class="media-heading" data-bind="text:genres"></div>
@@ -82,7 +82,6 @@
           </li>
         </div>
       </ul>
-
       <!--logout-->
       <button id="login-button" class="btn btn-primary" data-bind="click: logout">Log out from Spotify</button>
     </div>
