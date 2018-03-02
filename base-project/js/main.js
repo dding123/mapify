@@ -74,7 +74,7 @@
           evArr[i] = event;
         }
       });
-
+	  return evArr;
     }
     var ccIndex = 1;
     var ccArr = ['lightgreen', 'lightsalmon', 'gold', 'thistle', 'moccasin'];

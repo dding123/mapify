@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:300, 600, 900');
 body {
-  overflow-x: hidden;
   font-family: 'Work Sans', sans-serif;
   font-weight: 300;
   background: lightgreen;
@@ -8,21 +7,20 @@ body {
 
 .starter-template {
   text-align: center;
-  background-image: url('../images/henry-be-228194.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: right;
 }
 
-#loggedin {
+.container {
+  height: 100vh;
+}
+
+#content {
   text-align: center;
   background-color: whitesmoke;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #login-button, #logout-button {
-  margin: 3rem;
+  margin: 1rem;
 }
 
 #loggedin img {
@@ -30,7 +28,6 @@ body {
 }
 
 .artist {
-  width: 400px;
   text-align: left;
   margin: 1rem;
 }
@@ -55,8 +52,6 @@ strong {
   font-size: 4rem;
   font-weight: 600;
 }
-
-
 
 .artist-container {
   height: 30vh;
@@ -116,7 +111,7 @@ strong {
   border-radius: 50%;
 }
 
-.artist-pic img:hover{
+.artist-pic img:hover {
   cursor: pointer;
 }
 

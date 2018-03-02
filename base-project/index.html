@@ -38,7 +38,7 @@
   <div class="starter-template">
     <div id="splash">
       <h1 id="title">mapify</h1>
-      <h2 id="tagline">find your jams.</h2>
+      <h2 id="tagline">issa tagline.</h2>
       <p>
         <strong>Log in with Spotify to see where your favorite artists are performing next.
           <br> Buy tickets, discover similar artists, and listen to new music.</strong>
@@ -56,7 +56,6 @@
   <div class="container">
 
     <!-- ko if: isLoggedIn -->
-
     <nav class="navbar navbar-light bg-faded">
       <h1 class="navbar-brand mb-0">mapify</h1>
       <ul class="nav navbar-nav navbar-right">
@@ -69,7 +68,7 @@
       </ul>
     </nav>
 
-    <div id="loggedin">
+    <div id="content">
 
       <hr />
       <div class="row">
@@ -80,7 +79,8 @@
             <li class="media artist">
               <div class="media-left">
                 <div class="artist-pic">
-                  <img data-bind="event:{click:$parent.GetArtistEvents}, attr: {src: images.length ? images[0].url : ''}" width="200" height="200" />
+                  <img data-bind="event:{click:$parent.GetArtistEvents}, attr: {src: images.length ? images[0].url : ''}" width="200" height="200"
+                  />
                 </div>
               </div>
               <div class="media-body">
