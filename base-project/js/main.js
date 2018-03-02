@@ -58,7 +58,6 @@
     this.a = ko.observableArray([]);
 
     this.GetArtistEvents = function () {
-      console.log("nigga");
       var evArr = [];
       $.when($.getJSON('https://app.ticketmaster.com/discovery/v2/events.json?apikey=udQKQdhwkupacGyPtGOU8VHjAlXbM5xQ&countryCode=US&keyword=' + this.name)).done(function (json) {
         var arr = json._embedded.events;
