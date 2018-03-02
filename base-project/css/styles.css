@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300, 600, 900');
 body {
   overflow-x: hidden;
   font-family: 'Work Sans', sans-serif;
+  font-weight: 300;
+  background: lightgreen;
 }
 
 .starter-template {
@@ -13,12 +15,14 @@ body {
   background-position: right;
 }
 
-#login, #loggedin {
+#loggedin {
   text-align: center;
+  background-color: whitesmoke;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#login-button {
-  margin: 30px;
+#login-button, #logout-button {
+  margin: 3rem;
 }
 
 #loggedin img {
@@ -35,28 +39,49 @@ body {
   object-fit: cover;
 }
 
-#learn-more {
-  background-color: white;
+#splash {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
-#splash {
-  color: white;
-  height: 100vh;
+strong {
+  font-size: 1.5rem;
 }
+
+#tagline {
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+
 
 .artist-container {
   height: 30vh;
   text-align: left;
 }
 
-.artistPic {
-  display: inline;
-  margin: 0 auto;
-  height: 100%;
-  width: auto;
+.artist-name:hover {
+  cursor: pointer;
 }
 
-.apHold {
+#title {
+  font-size: 10rem;
+  font-weight: 900;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.nav {
+  margin: 0, auto;
+}
+
+.prof-pic {
   width: 3rem;
   height: 3rem;
   position: static;
@@ -68,6 +93,40 @@ body {
   border-radius: 50%;
 }
 
-.artistName{
+.prof-pic img {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
+.prof-pic img:hover {
   cursor: pointer;
+}
+
+.artist-pic {
+  width: 2rem;
+  height: 2rem;
+  position: static;
+  overflow: hidden;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.artist-pic img:hover{
+  cursor: pointer;
+}
+
+.artist-pic img {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
+.dropdown {
+  text-align: center;
 }

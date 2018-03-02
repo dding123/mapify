@@ -58,6 +58,7 @@
     this.a = ko.observableArray([]);
 
     this.GetArtistEvents = function () {
+      console.log("nigga");
       var evArr = [];
       $.when($.getJSON('https://app.ticketmaster.com/discovery/v2/events.json?apikey=udQKQdhwkupacGyPtGOU8VHjAlXbM5xQ&countryCode=US&keyword=' + this.name)).done(function (json) {
         var arr = json._embedded.events;
@@ -73,9 +74,15 @@
           event.time = arr[i].dates.start.localTime;
           evArr[i] = event;
         }
-        return evArr;
       });
 
+    }
+    var ccIndex = 1;
+    var ccArr = ['lightgreen', 'lightsalmon', 'gold', 'thistle', 'moccasin'];
+    this.changeColorScheme = function () {
+      $("body").css("background-color", ccArr[ccIndex]);
+      ccIndex++;
+      if (ccIndex == ccArr.length) ccIndex=0;
     }
   };
 
@@ -118,4 +125,5 @@
   }
 
   initAccessToken();
+
 })();
