@@ -1,8 +1,22 @@
+var map;
+
+function initMap() {
+    var us = {lat: 39.828, lng: -98.580};
+
+    // initialize map
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: us
+    });
+}
+
+
 (function () {
   'use strict';
   class Event {
-    constructor(name, venue, latitude, longitude, city, state, date, time) {
+    constructor(name, artistName, venue, latitude, longitude, city, state, date, time, url) {
       this.name = name;
+      this.artistName = artistName;
       this.venue = venue;
       this.latitude = latitude;
       this.longitude = longitude;
@@ -10,6 +24,7 @@
       this.state = state;
       this.date = date;
       this.time = time;
+      this.url = url;
     }
   }
 
@@ -65,18 +80,32 @@
     this.GetArtistEvents = function () {
       var evArr = [];
       $.when($.getJSON('https://app.ticketmaster.com/discovery/v2/events.json?apikey=udQKQdhwkupacGyPtGOU8VHjAlXbM5xQ&countryCode=US&keyword=' + this.name)).done(function (json) {
-        var arr = json._embedded.events;
-        for (var i in arr) {
-          let event = new Event;
-          event.name = arr[i].name;
-          event.venue = arr[i]._embedded.venues[0].name;
-          event.latitude = arr[i]._embedded.venues[0].location.latitude;
-          event.longitude = arr[i]._embedded.venues[0].location.longitude;
-          event.city = arr[i]._embedded.venues[0].city;
-          event.state = arr[i]._embedded.venues[0].state.name;
-          event.date = arr[i].dates.start.localDate;
-          event.time = arr[i].dates.start.localTime;
-          evArr[i] = event;
+        if (!json._embedded) {
+          console.log("no concerts");
+          clearMarkers();
+        } else {
+          var arr = json._embedded.events;
+          for (var i in arr) {
+            let event = new Event;
+            event.name = arr[i].name;
+            event.artistName = this.name;
+            event.venue = arr[i]._embedded.venues[0].name;
+            event.latitude = arr[i]._embedded.venues[0].location.latitude;
+            event.longitude = arr[i]._embedded.venues[0].location.longitude;
+            event.city = arr[i]._embedded.venues[0].city;
+            event.state = arr[i]._embedded.venues[0].state.name;
+            event.date = arr[i].dates.start.localDate;
+            event.time = arr[i].dates.start.localTime;
+            event.url = arr[i].url;
+            evArr[i] = event;
+          }
+          console.log(evArr);
+          if (evArr.length == 0){
+            console.log(evArr.length);
+          } else {
+            console.log(evArr.length);
+            kimTest(evArr);
+          }
         }
       });
       return evArr;
@@ -96,6 +125,97 @@
         viewModel.isSearch(true);
         console.log(artists.artists.items);
       });
+    }
+
+    var allMarkers = [];
+    // ----------------- GOOGLE MAPS CODE ------------------
+    function kimTest(arr){
+      clearMarkers();
+
+      var curMarkers = [];
+      var curWindows = [];
+      var activeWindow;
+      var windowOpen = false;
+
+      for (var j=0; j<arr.length; j++){
+        var pos = {
+          lat: parseInt(arr[j].latitude),
+          lng: parseInt(arr[j].longitude)
+        };
+
+        console.log(pos);
+
+        curMarkers[j] = new google.maps.Marker({
+          position: pos,
+          map: map
+        });
+    
+        var contentString = '<div>'+
+        '<div>'+
+        '</div>'+
+        '<h4>'+ arr[j].name +'</h4>'+
+        '<div>'+
+        '<p>' + arr[j].name + ' at <b>' + arr[j].venue + '</b>' +
+        ' in <b>' + arr[j].state + '</b>' +
+        ' on <b>' + arr[j].date + ' @ ' + parseTime(arr[j].time) + '</b>.'+
+        '<br><a href="' + arr[j].url + '">Buy Tickets</a>'
+        '</p>'+
+        '</div>'+
+        '</div>';
+
+        curWindows[j] = new google.maps.InfoWindow({
+          content: contentString,
+          maxWidth: '250'
+        });
+
+        google.maps.event.addListener(curMarkers[j], 'click', (function(marker, j) {
+          return function() {
+            if (!windowOpen){
+              curWindows[j].open(map, curMarkers[j]);
+              activeWindow = curWindows[j];
+              windowOpen = true;
+            } else {
+              activeWindow.close();
+              curWindows[j].open(map, curMarkers[j]);
+              activeWindow = curWindows[j];
+            }
+          }
+        })(curMarkers[j], j));
+
+        curMarkers[j].setMap(map);
+        allMarkers.push(curMarkers[j]);
+      }
+    }
+
+    function clearMarkers(){
+      for (var j=0; j<allMarkers.length; j++){
+        allMarkers[j].setMap(null);
+      }
+    }
+
+    function clearWindows(infoWindows){
+      for (var j=0; j<allMarkers.length; j++){
+        allMarkers[j].setMap(null);
+      }
+    }
+
+    function parseTime(time){
+      var hr = parseInt(time.substring(0, 2));
+      console.log("hr:" + hr);
+      var min = time.substring(3, 5);
+      console.log("min:" + min);
+
+      var timeOfDay = "AM";
+
+      if (hr > 12){
+        timeOfDay = "PM";
+        hr -= 12;
+      }
+      if (hr == 12){
+        timeOfDay = "PM";
+      }
+      
+      return hr + ":" + min + " " + timeOfDay;
     }
 
 

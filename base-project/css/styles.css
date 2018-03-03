@@ -132,6 +132,6 @@ strong {
   display: inline;
 }
 
-/* input {
-  border-radius: 10px;
-} */
+.row {
+  width: 100%;
+}
