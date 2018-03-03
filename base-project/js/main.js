@@ -15,6 +15,7 @@
 
   var ViewModel = function () {
     this.isLoggedIn = ko.observable(false);
+    this.isSearch = ko.observable(false);
     this.login = function () {
       var self = this;
       this.loginErrorMessage(null);
@@ -55,7 +56,7 @@
     this.user = ko.observable(null);
 
     this.artists = ko.observableArray([]);
-    this.a = ko.observableArray([]);
+    this.artistsSearch = ko.observableArray([]);
 
     this.GetArtistEvents = function () {
       var evArr = [];
@@ -74,15 +75,26 @@
           evArr[i] = event;
         }
       });
-	  return evArr;
+      return evArr;
     }
     var ccIndex = 1;
     var ccArr = ['lightgreen', 'lightsalmon', 'gold', 'thistle', 'moccasin'];
     this.changeColorScheme = function () {
       $("body").css("background-color", ccArr[ccIndex]);
       ccIndex++;
-      if (ccIndex == ccArr.length) ccIndex=0;
+      if (ccIndex == ccArr.length) ccIndex = 0;
     }
+
+    this.searchSpotify = function () {
+      var searchValue = document.getElementById("query").value;
+      spotifyApi.searchArtists(searchValue, { limit: 10 }).then(function (artists) {
+        viewModel.artistsSearch(artists.artists.items);
+        viewModel.isSearch(true);
+        console.log(artists.artists.items);
+      });
+    }
+
+
   };
 
   var viewModel = new ViewModel();

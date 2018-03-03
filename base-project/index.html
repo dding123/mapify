@@ -23,7 +23,7 @@
   <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/styles123.css" rel="stylesheet">
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -59,7 +59,12 @@
     <nav class="navbar navbar-light bg-faded">
       <h1 class="navbar-brand mb-0">mapify</h1>
       <ul class="nav navbar-nav navbar-right">
+        
         <div data-bind="with: user">
+
+          <input id="query" type="text">
+          <input data-bind="event:{click:$parent.searchSpotify}" type="submit" value="Submit">
+
           <span data-bind="text: display_name"></span>
           <div class="prof-pic">
             <img data-bind="event:{click:$parent.changeColorScheme}, attr: {src: images[0].url}">
@@ -72,6 +77,8 @@
 
       <hr />
       <div class="row">
+
+        <!-- ko ifnot:isSearch -->
         <div class="col-md-4">
           <h2>Your Favorite Artists</h2>
 
@@ -90,6 +97,29 @@
 
           </ul>
         </div>
+
+        <!-- /ko -->
+
+        <!-- ko if:isSearch -->
+        <div class="col-md-4">
+          <h2>Search Results:</h2>
+
+          <ul data-bind="foreach: artistsSearch">
+            <li class="media artist">
+              <div class="media-left">
+                <div class="artist-pic">
+                  <img data-bind="event:{click:$parent.GetArtistEvents}, attr: {src: images.length ? images[0].url : ''}" width="200" height="200"
+                  />
+                </div>
+              </div>
+              <div class="media-body">
+                <div class="media-heading artist-name" data-bind="event:{click:$parent.GetArtistEvents}, text:name"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- /ko -->
+
         <div class="col-md-8 mappy">
           HEY LOOK IT'S A MAP
         </div>
