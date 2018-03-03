@@ -41,6 +41,10 @@
       this.isLoggedIn(false);
     };
 
+    this.goback = function() {
+      this.isSearch(false);
+    }
+
     this.loginError = function (errorCode) {
       switch (errorCode) {
         case 'access_denied':

@@ -17,6 +17,7 @@ body {
   text-align: center;
   background-color: whitesmoke;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
 }
 
 #login-button, #logout-button {
@@ -76,7 +77,7 @@ strong {
   margin: 0, auto;
 }
 
-.prof-pic {
+ .prof-pic {
   width: 3rem;
   height: 3rem;
   position: static;
@@ -100,8 +101,8 @@ strong {
 }
 
 .artist-pic {
-  width: 2rem;
-  height: 2rem;
+  width: 4rem;
+  height: 4rem;
   position: static;
   overflow: hidden;
   -webkit-border-radius: 50%;
@@ -109,6 +110,7 @@ strong {
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   border-radius: 50%;
+  margin-right: .5rem;
 }
 
 .artist-pic img:hover {
@@ -125,3 +127,11 @@ strong {
 .dropdown {
   text-align: center;
 }
+
+.righttop{
+  display: inline;
+}
+
+/* input {
+  border-radius: 10px;
+} */

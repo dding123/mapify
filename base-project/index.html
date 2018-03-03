@@ -23,7 +23,7 @@
   <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/styles123.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -38,7 +38,7 @@
   <div class="starter-template">
     <div id="splash">
       <h1 id="title">mapify</h1>
-      <h2 id="tagline">issa tagline.</h2>
+      <h2 id="tagline">putting your favorite artists on the map.</h2>
       <p>
         <strong>Log in with Spotify to see where your favorite artists are performing next.
           <br> Buy tickets, discover similar artists, and listen to new music.</strong>
@@ -59,16 +59,15 @@
     <nav class="navbar navbar-light bg-faded">
       <h1 class="navbar-brand mb-0">mapify</h1>
       <ul class="nav navbar-nav navbar-right">
-        
-        <div data-bind="with: user">
 
-          <input id="query" type="text">
-          <input data-bind="event:{click:$parent.searchSpotify}" type="submit" value="Submit">
+        <div class="righttop" data-bind="with: user">
 
-          <span data-bind="text: display_name"></span>
-          <div class="prof-pic">
-            <img data-bind="event:{click:$parent.changeColorScheme}, attr: {src: images[0].url}">
-          </div>
+
+
+          <input class="mr-sm-2" id="query" type="text">
+          <input class="btn btn-warning" data-bind="event:{click:$parent.searchSpotify}" type="submit" value="Submit">
+          <span><img class="prof-pic" data-bind="event:{click:$parent.changeColorScheme}, attr: {src: images[0].url}"></span>
+
         </div>
       </ul>
     </nav>
@@ -117,6 +116,7 @@
               </div>
             </li>
           </ul>
+          <button id="back-button" class="btn btn-warning" data-bind="click: goback">Back</button>
         </div>
         <!-- /ko -->
 
