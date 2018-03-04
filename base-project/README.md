@@ -1,4 +1,4 @@
-base logic for IE3 project
+base logic for Mapify, project for IEEE Winter Quarter
 ===========
 
 This is based on a template from José Manuel Pérez (https://github.com/JMPerez/spotify-web-api-start-template).
